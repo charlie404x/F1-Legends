@@ -259,3 +259,7 @@ a.decade-card { display: block; }
 .cred-table td { white-space: normal; vertical-align: middle; }
 .cred-table a { word-break: break-word; }
 .cred-thumb { width: 48px; height: 60px; object-fit: cover; border-radius: 6px; }
+
+/* Corrección: fotos de "Campeones de la década" (la regla .era-hero .media de sections.css las estiraba a 360 px de alto) */
+.era-hero .era-champ .media { width: 40px; height: 40px; min-height: 0; aspect-ratio: 1; flex: none; border-radius: 50%; }
+.era-hero .era-champ { align-items: center; }
