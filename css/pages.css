@@ -263,3 +263,45 @@ a.decade-card { display: block; }
 /* Corrección: fotos de "Campeones de la década" (la regla .era-hero .media de sections.css las estiraba a 360 px de alto) */
 .era-hero .era-champ .media { width: 40px; height: 40px; min-height: 0; aspect-ratio: 1; flex: none; border-radius: 50%; }
 .era-hero .era-champ { align-items: center; }
+
+/* =========================================================
+   Ajustes para móvil (revisados en iPhone y Android)
+   ========================================================= */
+.vb-main > section + section, .vb > section + section { margin-top: 8px; }
+.vb-main > section + section { margin-top: 44px; }
+@media (max-width: 720px) {
+  /* Actualidad: las tarjetas ocupan todo el ancho (antes el Top 10 forzaba 2 columnas) */
+  .live-grid { grid-template-columns: minmax(0, 1fr); }
+  .live-grid > * { grid-column: 1 / -1 !important; grid-row: auto !important; }
+  /* Tablas compactas: en la columna de equipo solo el logotipo, sin desplazamiento lateral */
+  .timing { min-width: 0; font-size: .86rem; }
+  .timing th, .timing td { padding: 9px 7px; }
+  .team-cell { font-size: 0; gap: 0; }
+  .team-cell .team-mono { font-size: .7rem; }
+  .team-cell.big { font-size: .86rem; gap: 8px; }
+  .standings.st-drivers th:nth-child(n+5):nth-child(-n+7), .standings.st-drivers td:nth-child(n+5):nth-child(-n+7) { display: none; }
+  .standings:not(.st-drivers) th:nth-child(3), .standings:not(.st-drivers) td:nth-child(3) { display: none; }
+  .top10 th:nth-child(4), .top10 td:nth-child(4) { display: none; }
+  .st-driver { gap: 8px; }
+  .st-driver b { font-weight: 600; }
+  .media.avatar { width: 32px; height: 32px; }
+  /* Etiquetas de estado más cortas */
+  .live-meta, .champ-toolbar { gap: 6px; }
+  .status-pill, .auto-tag { font-size: .62rem; }
+  /* Ficha: retrato más grande y sin quedar tapado por «Volver» */
+  .vh-portrait { width: min(58vw, 230px); margin: 70px 0 0 16px; }
+  .vh-portrait figcaption { font-size: .66rem; padding: 18px 8px 6px; }
+  .vh h1 { font-size: clamp(2.3rem, 11vw, 3.4rem); }
+  .vh-meta { font-size: .9rem; gap: 6px 14px; }
+  /* Podio y tiras con desplazamiento cómodo */
+  .car-strip { grid-auto-columns: minmax(170px, 72vw); }
+  .gal-foot .btn { width: 100%; justify-content: center; }
+  .hero .tele-label { flex-wrap: wrap; }
+}
+@media (max-width: 720px) {
+  .live-card { padding: 18px 14px; }
+  .live-card .table-wrap { margin-left: -6px; margin-right: -6px; }
+  .top10 td:nth-child(2) { white-space: normal; }
+  .cur .timing th:nth-child(4), .cur .timing td:nth-child(4) { display: none; }
+  .cur .timing td:nth-child(2) { white-space: normal; }
+}

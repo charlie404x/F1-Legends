@@ -19,7 +19,7 @@ F1.sections.championship = (function () {
     const leader = +list[0]?.points || 0;
     body.innerHTML = `
       <div class="champ-toolbar">${F1.ui.freshness(Math.min(ds.ts, season?.ts || ds.ts), ds.stale)}<span class="tag neutral">${t("Datos tras la ronda {r} de {s}", { r: esc(ds.data.round), s: esc(ds.data.season) })}</span></div>
-      <div class="table-wrap"><table class="timing standings">
+      <div class="table-wrap"><table class="timing standings st-drivers">
         <thead><tr><th>Pos</th><th>${t("Piloto")}</th><th>${t("Equipo")}</th><th class="num">${t("Puntos")}</th><th class="num">${t("Victorias")}</th><th class="num">${t("Podios")}</th><th class="num">Poles</th><th class="num">${t("Dif. líder")}</th></tr></thead>
         <tbody>${list.map((s) => {
           const st = season?.by[s.Driver.driverId];

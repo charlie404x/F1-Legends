@@ -74,7 +74,7 @@ F1.sections.live = (function () {
           </article>
           <article class="live-card" style="grid-column: span 2">
             <p class="tele-label">${t("Últimos resultados · Top 10")}</p>
-            ${l ? `<div class="table-wrap" style="margin-top:12px"><table class="timing"><thead><tr><th>Pos</th><th>${t("Piloto")}</th><th>${t("Equipo")}</th><th class="num">${t("Tiempo / estado")}</th><th class="num">Pts</th></tr></thead><tbody>
+            ${l ? `<div class="table-wrap" style="margin-top:12px"><table class="timing top10"><thead><tr><th>Pos</th><th>${t("Piloto")}</th><th>${t("Equipo")}</th><th class="num">${t("Tiempo / estado")}</th><th class="num">Pts</th></tr></thead><tbody>
               ${l.Results.slice(0, 10).map((r) => `<tr class="p${r.position} clickable" data-go="${href.driver(r.Driver.driverId)}"><td class="pos">${r.positionText}</td><td><span class="drv-cell" data-pid="${esc(r.Driver.driverId)}"><span class="av-slot"></span>${flag(r.Driver.nationality)} ${esc(drv.name(r.Driver.driverId, r.Driver))}</span></td><td><span class="team-cell">${F1.ui.teamLogoApi(r.Constructor.constructorId, 24)}${esc(r.Constructor.name)}</span></td><td class="num">${esc(r.Time?.time || r.status)}</td><td class="num">${esc(r.points)}</td></tr>`).join("")}
             </tbody></table></div>` : ""}
           </article>
