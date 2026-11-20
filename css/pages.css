@@ -1,0 +1,261 @@
+/* =========================================================
+   F1 LEGENDS — pages.css
+   Estilos añadidos para la versión multipágina: botón de idioma,
+   cabeceras de página, logotipos, retratos en tablas, galerías
+   (mosaico + carrusel), tiras de monoplazas y retratos.
+   Respeta los tokens de diseño de base.css (colores, tipografía,
+   radios y animaciones).
+   ========================================================= */
+
+/* ---------- Botón de idioma ---------- */
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 2px; height: 34px; padding: 3px; border-radius: 999px; margin: 0 4px;
+  background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line-2); font-family: var(--f-display); font-weight: 800; letter-spacing: 1px; font-size: .85rem;
+}
+.lang-btn span { padding: 4px 9px; border-radius: 999px; color: var(--muted); transition: background .2s, color .2s; }
+.lang-btn span.on { background: var(--red); color: #fff; }
+.lang-btn:hover span:not(.on) { color: var(--text); }
+.nav-menu a.active { color: var(--text); background: var(--surface-3); }
+
+/* ---------- Páginas interiores ---------- */
+body.subpage main { padding-top: var(--nav-h); }
+.page-banner {
+  position: relative; isolation: isolate; overflow: hidden; min-height: clamp(260px, 42vh, 420px);
+  display: grid; align-items: end; padding: 48px clamp(16px, 4vw, 48px) 36px; color: var(--warm);
+}
+.page-banner > .media { position: absolute; inset: 0; z-index: -2; background: var(--black); }
+.page-banner > .media img { object-position: 50% 40%; animation: kenburns 24s ease-out forwards; }
+.page-banner::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, var(--bg) 0%, rgba(8,8,8,.55) 45%, rgba(8,8,8,.25)), linear-gradient(90deg, rgba(8,8,8,.85), transparent 75%); }
+[data-theme="light"] .page-banner::after { background: linear-gradient(0deg, rgba(8,8,8,.9) 0%, rgba(8,8,8,.5) 50%, rgba(8,8,8,.2)), linear-gradient(90deg, rgba(8,8,8,.8), transparent 75%); }
+.pb-inner { max-width: var(--maxw); width: 100%; margin: 0 auto; }
+.page-banner h1 { font-size: clamp(2.6rem, 7vw, 5.6rem); text-transform: uppercase; font-style: italic; font-weight: 900; line-height: .92; margin-top: 10px; }
+.page-banner p { color: #e3ded3; margin-top: 12px; max-width: 640px; font-size: 1.08rem; }
+.crumbs { font-family: var(--f-mono); font-size: .78rem; letter-spacing: 1px; text-transform: uppercase; color: #cfc9bd; }
+.crumbs a { color: var(--red-hi); }
+.page-ficha .footer { display: block !important; }
+.footer-inner { grid-template-columns: 1.4fr 1fr 1fr 1.4fr; }
+.footer-links { display: grid; gap: 6px; margin-top: 10px; color: var(--text-2); }
+.footer-links a:hover { color: var(--text); text-decoration: underline; }
+a.decade-card { display: block; }
+@media (max-width: 900px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 720px) { .footer-inner { grid-template-columns: 1fr; } .lang-btn { margin: 0 2px; } .lang-btn span { padding: 4px 7px; } }
+
+/* ---------- Explora (portada) ---------- */
+.explore-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.explore-card { position: relative; display: block; aspect-ratio: 4 / 3; border-radius: var(--r); overflow: hidden; box-shadow: inset 0 0 0 1px var(--line); }
+.explore-card.wide { grid-column: span 2; aspect-ratio: auto; min-height: 260px; }
+.explore-card .media { position: absolute; inset: 0; }
+.explore-card .media img { transition: transform .9s var(--ease); }
+.explore-card:hover .media img { transform: scale(1.07); }
+.explore-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.9) 8%, rgba(0,0,0,.05) 70%); }
+.explore-info { position: absolute; left: 18px; right: 18px; bottom: 16px; z-index: 2; color: #fff; display: grid; gap: 4px; }
+.explore-info b { font-family: var(--f-display); font-size: clamp(1.4rem, 2.2vw, 2rem); font-weight: 900; font-style: italic; text-transform: uppercase; line-height: 1; }
+.explore-info small { color: #d6d1c6; font-size: .86rem; }
+.explore-info i { position: absolute; right: 0; bottom: 0; font-style: normal; font-size: 1.4rem; color: var(--red-hi); transition: transform .3s var(--ease); }
+.explore-card:hover .explore-info i { transform: translateX(4px); }
+@media (max-width: 1000px) { .explore-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .explore-grid { grid-template-columns: 1fr; } .explore-card.wide { grid-column: auto; min-height: 0; aspect-ratio: 4 / 3; } }
+
+/* ---------- Logotipos ---------- */
+.team-logo {
+  display: inline-grid; place-items: center; flex: none; padding: 5px 8px; border-radius: 10px; box-sizing: border-box;
+  background: #f7f5f0; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06), 0 4px 14px rgba(0,0,0,.18); max-width: 100%;
+}
+.team-logo { height: var(--lh, 54px); }
+.team-logo img { height: calc(var(--lh, 54px) - 10px); width: auto; max-width: 100%; object-fit: contain; display: block; }
+.team-cell .team-logo img, .champ-teams .team-logo img, .podium-mini .team-logo img, .pod-info .team-logo img { height: calc(var(--lh, 26px) - 6px); }
+.tag-logo .team-logo img { height: calc(var(--lh, 18px) - 2px); }
+.team-head .team-logo { max-width: 140px; }
+.team-cell { display: inline-flex; align-items: center; gap: 10px; }
+.team-cell .team-logo { padding: 3px 5px; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); max-width: 70px; }
+.team-cell.big .team-logo { max-width: 110px; }
+.logo-wall { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 26px; padding: 14px; border-radius: var(--r); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.logo-wall a { display: block; transition: transform .25s var(--ease); }
+.logo-wall a:hover { transform: translateY(-3px) scale(1.04); }
+.logo-wall .team-logo { max-width: 120px; }
+.car-team, .champ-teams { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.champ-teams .team-logo { padding: 2px 4px; border-radius: 5px; max-width: 60px; box-shadow: none; }
+.tag-logo { display: inline-flex; align-items: center; gap: 6px; padding-left: 4px; }
+.tag-logo .team-logo { padding: 1px 3px; border-radius: 4px; box-shadow: none; max-width: 48px; }
+.vh-logo { margin-bottom: 14px; }
+.vh-logo .team-logo { max-width: 220px; padding: 8px 14px; border-radius: 14px; }
+.logo-card { display: grid; gap: 14px; justify-items: start; border-top: 4px solid var(--tc); }
+.logo-card .team-logo { max-width: 100%; padding: 12px 18px; }
+.logo-eras { display: flex; flex-wrap: wrap; gap: 10px; }
+.logo-eras span { display: grid; gap: 4px; justify-items: center; font-size: .7rem; color: var(--muted); }
+.logo-eras img { height: 34px; width: auto; max-width: 110px; object-fit: contain; background: #f7f5f0; border-radius: 6px; padding: 4px 6px; }
+.team-list li, .title-list li, .era-teams li { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px dashed var(--line); }
+.team-list li:last-child, .title-list li:last-child, .era-teams li:last-child { border-bottom: 0; }
+.team-list .team-logo, .title-list .team-logo, .era-teams .team-logo { max-width: 80px; padding: 3px 6px; border-radius: 6px; }
+.title-list b { font-family: var(--f-mono); color: var(--gold); min-width: 42px; }
+.team-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--muted); flex: none; }
+.cur-team { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.cur-team span { display: grid; }
+
+/* ---------- Retratos en tablas y listas ---------- */
+.media.avatar { width: 38px; height: 38px; border-radius: 50%; flex: none; box-shadow: 0 0 0 2px var(--tc, var(--line-2)); }
+.media.avatar img { object-position: 50% 18%; }
+.media.is-car img { object-position: 50% 50%; }
+.st-driver { display: flex; align-items: center; gap: 12px; }
+.st-num { font-family: var(--f-display); font-style: italic; font-weight: 900; color: var(--tc); font-size: 1.15rem; min-width: 22px; display: inline-block; }
+.standings td { vertical-align: middle; }
+.standings tbody tr { box-shadow: inset 4px 0 0 var(--tc, transparent); }
+.drv-cell { display: inline-flex; align-items: center; gap: 10px; }
+.podium-mini li { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.podium-mini .media.avatar { width: 32px; height: 32px; }
+.podium-mini .team-logo { padding: 2px 4px; border-radius: 5px; max-width: 64px; }
+
+/* ---------- Galerías (mosaico + carrusel) ---------- */
+.gal-mosaic { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(120px, 15vw, 190px); grid-auto-flow: dense; gap: 10px; }
+.gal-tile { position: relative; margin: 0; border-radius: var(--r-sm); overflow: hidden; cursor: zoom-in; background: var(--surface-2); }
+.gal-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease), opacity .5s; }
+.gal-tile:hover img, .gal-tile:focus-visible img { transform: scale(1.06); }
+.gal-tile.big { grid-column: span 2; grid-row: span 2; }
+.gal-tile.wide { grid-column: span 2; }
+.gal-tile.tall { grid-row: span 2; }
+.gal-tile.big.tall { grid-column: span 2; }
+.gal-tile figcaption {
+  position: absolute; inset: auto 0 0 0; padding: 26px 12px 10px; display: flex; gap: 8px; align-items: end; justify-content: space-between;
+  background: linear-gradient(0deg, rgba(0,0,0,.85), transparent); color: #eee; font-size: .78rem; line-height: 1.3;
+  opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .3s var(--ease);
+}
+.gal-tile figcaption span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.gal-tile figcaption b { font-family: var(--f-mono); color: var(--gold); flex: none; }
+.gal-tile:hover figcaption, .gal-tile:focus-visible figcaption, .gal-tile.big figcaption { opacity: 1; transform: none; }
+.gal-carousel { position: relative; margin-top: 10px; }
+.gal-track { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(180px, 22vw, 260px); gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; padding-bottom: 6px; }
+.gal-track .gal-tile { aspect-ratio: 4 / 3; scroll-snap-align: start; }
+.gal-arrow { position: absolute; top: calc(50% - 22px); z-index: 2; width: 44px; height: 44px; border-radius: 50%; background: var(--glass); color: var(--text); font-size: 1.7rem; line-height: 1; box-shadow: inset 0 0 0 1px var(--line-2); transition: background .2s, opacity .2s; }
+.gal-arrow:hover { background: var(--red); color: #fff; }
+.gal-arrow:disabled { opacity: 0; pointer-events: none; }
+.gal-arrow.prev { left: -10px; } .gal-arrow.next { right: -10px; }
+.gal-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.gal-skeleton { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 120px; gap: 10px; margin-bottom: 10px; }
+.gal-skeleton i { border-radius: var(--r-sm); background: linear-gradient(90deg, var(--surface-2), var(--surface-3), var(--surface-2)); background-size: 200% 100%; animation: shimmer 1.4s infinite linear; }
+.gal-skeleton i:first-child { grid-column: span 2; grid-row: span 2; }
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (max-width: 720px) {
+  .gal-mosaic { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; }
+  .gal-tile.wide { grid-column: span 2; }
+  .gal-tile figcaption { opacity: 1; transform: none; }
+  .gal-arrow { display: none; }
+  .gal-skeleton { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Lightbox: miniaturas */
+.lb-strip { display: flex; gap: 6px; overflow-x: auto; padding: 0 16px 14px; justify-content: safe center; scrollbar-width: thin; }
+.lb-strip[hidden] { display: none; }
+.lb-strip button { flex: none; width: 64px; height: 44px; border-radius: 6px; overflow: hidden; opacity: .5; box-shadow: inset 0 0 0 2px transparent; transition: opacity .2s; }
+.lb-strip button.on { opacity: 1; outline: 2px solid var(--red); outline-offset: 1px; }
+.lb-strip button:hover { opacity: .9; }
+.lb-strip img { width: 100%; height: 100%; object-fit: cover; }
+.lightbox { grid-template-rows: auto 1fr auto auto; }
+.lb-stage img { transition: opacity .35s, transform .35s var(--ease); }
+
+/* ---------- Tiras de monoplazas y retratos ---------- */
+.car-strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(200px, 250px); justify-content: start; gap: 12px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x proximity; }
+.car-step { position: relative; display: block; border-radius: var(--r-sm); overflow: hidden; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); scroll-snap-align: start; }
+.car-step .media { aspect-ratio: 16 / 10; }
+.car-step:hover .media img { transform: scale(1.05); }
+.cs-year { position: absolute; top: 10px; left: 10px; z-index: 2; font-family: var(--f-mono); font-size: .8rem; background: var(--red); color: #fff; padding: 2px 8px; border-radius: 999px; }
+.cs-name { display: grid; padding: 10px 12px 12px; }
+.cs-name small { color: var(--muted); }
+.portrait-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; margin-top: 14px; }
+.pg-item { display: grid; gap: 6px; text-align: center; font-size: .86rem; font-weight: 600; }
+.pg-item .media { aspect-ratio: 4 / 5; border-radius: var(--r-sm); }
+.pg-item .media img { object-position: 50% 18%; }
+.pg-item:hover .media img { transform: scale(1.06); }
+.cur-drivers { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.cur-driver { display: flex; gap: 14px; align-items: center; padding: 10px; border-radius: var(--r); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line), inset 4px 0 0 var(--tc); }
+.cur-driver .media { width: 86px; height: 104px; border-radius: var(--r-sm); flex: none; }
+.cur-driver .media img { object-position: 50% 15%; }
+.cur-driver > span { display: grid; gap: 2px; }
+.podium-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: end; }
+.pod-card { position: relative; display: block; border-radius: var(--r); overflow: hidden; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.pod-card .media { aspect-ratio: 4 / 5; }
+.pod-card .media img { object-position: 50% 18%; }
+.pod-card.p1 { order: 2; } .pod-card.p2 { order: 1; } .pod-card.p3 { order: 3; }
+.pod-card.p1 .media { aspect-ratio: 4 / 5.6; }
+.pod-pos { position: absolute; top: 10px; left: 10px; z-index: 2; font-family: var(--f-display); font-style: italic; font-weight: 900; font-size: 1.6rem; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.6); }
+.pod-card.p1 .pod-pos { color: #ffd84d; }
+.pod-info { display: grid; gap: 4px; padding: 10px 12px 12px; }
+.pod-info small { display: flex; align-items: center; gap: 6px; color: var(--muted); flex-wrap: wrap; }
+.pod-info .team-logo { padding: 2px 4px; border-radius: 5px; max-width: 60px; }
+.top-winners { display: flex; flex-wrap: wrap; gap: 10px; }
+.tw-item { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px 4px 4px; border-radius: 999px; background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line); font-size: .88rem; }
+.tw-item b { font-family: var(--f-mono); color: var(--gold); }
+@media (max-width: 560px) { .podium-photos { grid-template-columns: 1fr; } .pod-card.p1, .pod-card.p2, .pod-card.p3 { order: 0; } .pod-card .media, .pod-card.p1 .media { aspect-ratio: 16 / 11; } }
+
+/* ---------- Historia por décadas ---------- */
+.era-champs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 8px; margin-top: 10px; }
+.era-champ { display: flex; align-items: center; gap: 10px; padding: 6px 10px 6px 6px; border-radius: 999px; background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line); transition: box-shadow .2s; }
+.era-champ:hover { box-shadow: inset 0 0 0 1px var(--era-accent, var(--red)); }
+.era-champ .media { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+.era-champ .media img { object-position: 50% 18%; filter: var(--era-filter); }
+.era-champ span { display: grid; line-height: 1.15; }
+.era-champ small { color: var(--muted); font-size: .76rem; }
+.era-cars { display: grid; gap: 8px; }
+.era-car { display: flex; align-items: center; gap: 10px; }
+.era-car .media { width: 88px; aspect-ratio: 16 / 10; border-radius: 6px; flex: none; }
+.era-car .media img { filter: var(--era-filter); }
+.era-car span { display: grid; line-height: 1.2; }
+.era-car small { color: var(--muted); font-size: .76rem; }
+.era-photos .media { position: relative; }
+.ph-cap { position: absolute; inset: auto 0 0 0; padding: 18px 8px 6px; font-size: .72rem; color: #eee; background: linear-gradient(0deg, rgba(0,0,0,.8), transparent); }
+
+/* ---------- Circuitos ---------- */
+.cir-photo { position: relative; }
+.circuit-card .cir-photo { aspect-ratio: 4 / 3; }
+.cir-map { position: absolute !important; right: 8px; bottom: 8px; width: 36%; aspect-ratio: 1; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,.4); }
+.cir-map.media.contain img { padding: 4px; }
+.cir-photo.fail .cir-map { width: 80%; right: 10%; bottom: 10%; }
+
+/* ---------- Tecnología ---------- */
+.tech-photos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 18px 0 26px; }
+.tech-photo { position: relative; display: block; aspect-ratio: 4 / 3; border-radius: var(--r-sm); overflow: hidden; }
+.tech-photo .media { position: absolute; inset: 0; }
+.tech-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.85), transparent 65%); }
+.tech-photo span { position: absolute; left: 10px; right: 10px; bottom: 8px; z-index: 2; color: #fff; display: grid; line-height: 1.2; }
+.tech-photo b { font-family: var(--f-display); font-size: 1.05rem; text-transform: uppercase; }
+.tech-photo small { color: #ccc; font-size: .72rem; }
+.tech-photo:hover .media img { transform: scale(1.06); }
+@media (max-width: 900px) { .tech-photos { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .tech-photos { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- Fichas ---------- */
+.vh-portrait figcaption { position: absolute; inset: auto 0 0 0; z-index: 2; padding: 22px 12px 8px; font-size: .74rem; color: #ddd; background: linear-gradient(0deg, rgba(0,0,0,.85), transparent); }
+.vb section.wide-sec .gal-mosaic { grid-auto-rows: clamp(110px, 12vw, 170px); }
+.rel-plays .card .media { aspect-ratio: 16 / 9; }
+
+/* Cabeceras decorativas: si la foto no carga, se mantiene el fondo oscuro sin texto */
+.page-banner > .media.fail::after, .explore-card .media.fail::after, .vh-bg .media.fail::after { display: none; }
+.page-banner > .media.fail, .vh-bg .media.fail { background: radial-gradient(ellipse at 70% 30%, color-mix(in srgb, var(--red) 22%, transparent), transparent 60%), var(--carbon-tex); background-color: #111; }
+
+/* Barra superior compacta en móviles (logo + buscador + favoritos + idioma + tema + menú) */
+@media (max-width: 560px) {
+  .nav { gap: 6px; padding: 0 8px 0 12px; }
+  .logo { gap: 7px; }
+  .logo-mark { width: 26px; height: 16px; }
+  .logo-text { font-size: 1.08rem; }
+  .nav-tools { gap: 0; }
+  .nav-tools .icon-btn { width: 34px; height: 34px; }
+  .nav-tools .icon-btn svg { width: 18px; height: 18px; }
+  .lang-btn { height: 30px; margin: 0 2px; font-size: .74rem; padding: 2px; }
+  .lang-btn span { padding: 3px 6px; }
+  .burger { width: 36px; height: 40px; }
+  .burger span { left: 8px; right: 8px; }
+}
+@media (max-width: 360px) { .logo-text b { display: none; } }
+
+/* Evita que el contenido de las rejillas ensanche la página en móvil */
+.vb-grid > *, .era-hero > *, .feature > *, .gal-mosaic > *, .live-grid > *, .cmp-heads > * { min-width: 0; }
+.gal-mosaic { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 720px) { .gal-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.vb > * { min-width: 0; }
+@media (max-width: 900px) { .era-img .media { min-height: 0; width: 100%; } .era-champ .media { min-height: 0; aspect-ratio: 1; width: 40px; } }
+
+/* Créditos */
+.cred-h { margin: 34px 0 12px; font-size: 1.6rem; text-transform: uppercase; }
+.cred-table td { white-space: normal; vertical-align: middle; }
+.cred-table a { word-break: break-word; }
+.cred-thumb { width: 48px; height: 60px; object-fit: cover; border-radius: 6px; }

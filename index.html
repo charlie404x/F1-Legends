@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F1 Legends · The History of Formula 1</title>
+  <!-- Punto de entrada: todas las páginas están en la carpeta paginas/ -->
+  <meta http-equiv="refresh" content="0; url=paginas/inicio/inicio.html" />
+  <script>
+    // Conserva parámetros y enlaces antiguos (#/piloto/... → ficha)
+    (function () {
+      var h = location.hash || "", q = location.search || "";
+      var dest = h.indexOf("#/") === 0 ? "paginas/fichas/ficha.html" : "paginas/inicio/inicio.html";
+      location.replace(dest + q + h);
+    })();
+  </script>
+  <style>body{background:#080808;color:#f4f1ea;font-family:system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;margin:0}a{color:#ff2b1c}</style>
+</head>
+<body>
+  <p>Cargando F1 Legends… / Loading… <a href="paginas/inicio/inicio.html">Entrar</a></p>
+</body>
+</html>
