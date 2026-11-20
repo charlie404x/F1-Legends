@@ -48,6 +48,34 @@
     const mono = esc(t.mono || "");
     return `<span class="team-logo${L.dark ? " on-dark" : ""}" style="--tc:${t.color};--lh:${size}px" title="${esc(t.name)}${L.season ? ` · ${esc(F1.t("logotipo"))} ${esc(L.season)}` : ""}"><img src="${esc(L.src)}" alt="${esc(F1.t("Logotipo de {n}", { n: t.name }))}" loading="lazy" decoding="async" onerror="this.parentNode.outerHTML='<span class=&quot;team-mono&quot; style=&quot;--tc:${t.color}&quot; aria-hidden=&quot;true&quot;>${mono}</span>'"/></span>`;
   };
+  /* ---------- Redes sociales oficiales (js/data/social.js) ---------- */
+  const SOCIAL = {
+    instagram: { n: "Instagram", u: (v) => `https://www.instagram.com/${v}/`, h: (v) => "@" + v, d: "M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.6a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4zm0 8.6a3.4 3.4 0 1 1 0-6.8 3.4 3.4 0 0 1 0 6.8zm5.4-9.9a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z" },
+    x: { n: "X", u: (v) => `https://x.com/${v}`, h: (v) => "@" + v, d: "M17.8 3h3.1l-6.8 7.7 8 10.6h-6.3l-4.9-6.4L5.3 21.3H2.2l7.3-8.3L1.8 3h6.4l4.4 5.9L17.8 3zm-1.1 16.4h1.7L7.3 4.8H5.5l11.2 14.6z" },
+    youtube: { n: "YouTube", u: (v) => /^UC[\w-]{20,}$/.test(v) ? `https://www.youtube.com/channel/${v}` : `https://www.youtube.com/@${v}`, h: () => "YouTube", d: "M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15V9l5.8 3-5.8 3z" },
+    tiktok: { n: "TikTok", u: (v) => `https://www.tiktok.com/@${v}`, h: (v) => "@" + v, d: "M16.6 2h-3.4v13.6a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.3a6.4 6.4 0 1 0 5.4 6.3V8.8a8 8 0 0 0 4.6 1.5V6.9A4.6 4.6 0 0 1 16.6 2z" },
+    facebook: { n: "Facebook", u: (v) => /^\d+$/.test(v) ? `https://www.facebook.com/profile.php?id=${v}` : `https://www.facebook.com/${v}`, h: () => "Facebook", d: "M13.5 21.9v-8h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.5 1.6-1.5h1.7V4.3c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.6v3.2h2.7v8a10 10 0 1 1 3.2 0z" },
+    twitch: { n: "Twitch", u: (v) => `https://www.twitch.tv/${v}`, h: (v) => v, d: "M3.6 2 2.2 5.6v14.7h5v2.7h2.8l2.7-2.7h4.1l5.5-5.5V2H3.6zm16.9 11.9-3.2 3.2h-5l-2.7 2.7v-2.7H5.4V3.8h15.1v10.1zM16.8 7.4v5.5h-1.9V7.4h1.9zm-5 0v5.5H9.9V7.4h1.9z" },
+    web: { n: "Web", u: (v) => v, h: (v) => v.replace(/^https?:\/\/(www\.)?/, "").replace(/\/.*$/, ""), d: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-3a15.7 15.7 0 0 0-1.4-3.6A8 8 0 0 1 18.9 8zM12 4a14 14 0 0 1 1.9 4h-3.8A14 14 0 0 1 12 4zM4.3 14a8.2 8.2 0 0 1 0-4h3.4a16.5 16.5 0 0 0 0 4H4.3zm.8 2h3a15.7 15.7 0 0 0 1.4 3.6A8 8 0 0 1 5.1 16zm3-8h-3a8 8 0 0 1 4.4-3.6C8.8 5.5 8.4 6.7 8.1 8zM12 20a14 14 0 0 1-1.9-4h3.8A14 14 0 0 1 12 20zm2.3-6H9.7a14.7 14.7 0 0 1 0-4h4.6a14.7 14.7 0 0 1 0 4zm.2 5.6c.6-1.1 1.1-2.3 1.4-3.6h3a8 8 0 0 1-4.4 3.6zm1.8-5.6a16.5 16.5 0 0 0 0-4h3.4a8.2 8.2 0 0 1 0 4h-3.4z" },
+  };
+  const SOCIAL_ORDER = ["instagram", "x", "youtube", "tiktok", "facebook", "twitch", "web"];
+  /**
+   * Botones de redes sociales oficiales.
+   * @param {string} key  id del piloto (Jolpica) o clave del equipo
+   * @param {object} o    { size: "sm" | "lg", labels: true para mostrar el usuario }
+   */
+  const social = (key, o = {}) => {
+    const s = (F1.data.social || {})[key];
+    if (!s) return "";
+    const items = SOCIAL_ORDER.filter((k) => s[k]).map((k) => {
+      const c = SOCIAL[k], v = s[k];
+      return `<a class="soc soc-${k}" href="${esc(c.u(v))}" target="_blank" rel="noopener noreferrer" title="${esc(c.n)}: ${esc(c.h(v))}" aria-label="${esc(c.n)} (${F1.t("se abre en una pestaña nueva")})"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${c.d}"/></svg>${o.labels ? `<span>${esc(c.h(v))}</span>` : ""}</a>`;
+    });
+    return items.length ? `<div class="socials ${o.size || ""} ${o.labels ? "labeled" : ""}">${items.join("")}</div>` : "";
+  };
+
+  document.addEventListener("click", (e) => { if (e.target.closest(".soc")) e.stopPropagation(); }, true);
+
   /** Logotipo a partir de un constructorId de la API. */
   const teamLogoApi = (cid, size, o) => teamLogo(F1.team.fromApi(cid), size, o);
 
@@ -139,6 +167,6 @@
   const freshness = (ts, stale) =>
     `<span class="status-pill ${stale ? "cache" : "online"}"><i></i>${F1.t(stale ? "Copia guardada" : "Actualizado")} ${F1.u.relTime(ts)} · ${F1.u.fmtDateTime(ts)}</span>`;
 
-  F1.ui = { href, drv, flag, flagImg, teamMono, teamLogo, teamLogoApi, favBtn, chips, bindChips, tabs, searchField, select, stats, videoRef, videoNode, statusPill, freshness };
+  F1.ui = { href, drv, flag, flagImg, teamMono, teamLogo, teamLogoApi, social, favBtn, chips, bindChips, tabs, searchField, select, stats, videoRef, videoNode, statusPill, freshness };
   F1.drv = drv;
 })();

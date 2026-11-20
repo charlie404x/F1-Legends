@@ -23,6 +23,7 @@ F1.sections.drivers = (function () {
           <span class="tele-label">${flag(o.nat)} ${esc(F1.nat(o.nat)[1])}${o.era ? " · " + esc(o.era) : ""}</span>
           <h3>${esc(o.name)}</h3>
           <p class="small">${esc(o.sub)}</p>
+          ${o.api ? F1.ui.social(o.id, { size: "sm" }) : ""}
           <div class="card-foot">${o.titles ? `<span class="tag gold">${o.titles} ${t(o.titles > 1 ? "títulos" : "título")}</span>` : o.logo || "<span></span>"}${o.extra ? `<span class="mono">${o.extra}</span>` : ""}</div>
         </div>
       </article>`);

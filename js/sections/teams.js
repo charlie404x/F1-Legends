@@ -22,6 +22,7 @@ F1.sections.teams = (function () {
           <div class="card-body">
             <div class="team-head">${F1.ui.teamLogo(tm, 54)}<div><h3>${esc(tm.short)}</h3><span class="tele-label">${F1.ui.flag(tm.nat)} ${tm.debut}${tm.current ? " · " + t("en activo") : ""}</span></div></div>
             <p>${esc(tm.history.split(". ").slice(0, 2).join(". "))}.</p>
+            ${tm.current ? F1.ui.social(tm.key, { size: "sm" }) : ""}
             <div class="card-foot"><span class="tag gold">${cy} ${t("constructores")}</span><span class="tag neutral">${dy} ${t("pilotos")}</span></div>
           </div>
         </article>`);

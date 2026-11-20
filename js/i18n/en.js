@@ -237,4 +237,5 @@ F1.i18n.add({
   "Los videos se reproducen con el reproductor oficial de YouTube y pertenecen a sus canales.": "Videos play in the official YouTube player and belong to their channels.",
   "Actualización automática": "Auto-update", "próxima en": "next in", "fin de semana de GP": "GP weekend", "Fin de semana de carrera: cada 2 minutos": "Race weekend: every 2 minutes", "Cada 10 minutos": "Every 10 minutes",
   "Los titulares se muestran en el idioma de cada medio.": "Headlines are shown in each outlet's language.",
+  "Redes sociales oficiales": "Official social media", "Cuentas verificadas en Wikidata": "Accounts verified on Wikidata", "se abre en una pestaña nueva": "opens in a new tab",
 });

@@ -305,3 +305,30 @@ a.decade-card { display: block; }
   .cur .timing th:nth-child(4), .cur .timing td:nth-child(4) { display: none; }
   .cur .timing td:nth-child(2) { white-space: normal; }
 }
+
+/* ---------- Redes sociales ---------- */
+.socials { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.soc { --sc: var(--text-2); display: inline-flex; align-items: center; gap: 8px; height: 34px; min-width: 34px; padding: 0 9px; border-radius: 999px; justify-content: center;
+  background: var(--surface-2); color: var(--sc); box-shadow: inset 0 0 0 1px var(--line-2); transition: background .2s, color .2s, transform .2s var(--ease); font-size: .82rem; font-weight: 600; }
+.soc svg { width: 16px; height: 16px; fill: currentColor; flex: none; }
+.soc:hover { transform: translateY(-2px); color: #fff; }
+.soc-instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.soc-x:hover { background: #000; }
+.soc-youtube:hover { background: #ff0000; }
+.soc-tiktok:hover { background: #111; box-shadow: -2px 0 0 #25f4ee inset, 2px 0 0 #fe2c55 inset; }
+.soc-facebook:hover { background: #1877f2; }
+.soc-twitch:hover { background: #9146ff; }
+.soc-web:hover { background: var(--red); }
+.socials.sm .soc { height: 28px; min-width: 28px; padding: 0 6px; }
+.socials.sm .soc svg { width: 14px; height: 14px; }
+.socials.lg .soc { height: 38px; min-width: 38px; background: rgba(244,241,234,.1); color: #f4f1ea; box-shadow: inset 0 0 0 1px rgba(244,241,234,.25); }
+.socials.labeled { flex-direction: column; align-items: stretch; }
+.socials.labeled .soc { justify-content: flex-start; height: 38px; padding: 0 12px; border-radius: 10px; }
+.socials.labeled .soc span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vh-actions .socials { margin-right: 4px; }
+.card-body > .socials { margin-top: 2px; }
+.gt-social { padding: 0 18px 10px 24px; }
+.gt-driver-wrap { background: var(--surface); display: grid; }
+.gt-driver-wrap .socials { padding: 0 14px 12px 22px; }
+.cur-driver .socials { margin-top: 6px; }
+@media (max-width: 560px) { .socials.lg .soc { height: 34px; min-width: 34px; } }

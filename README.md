@@ -42,6 +42,10 @@ Cada página solo contiene su `<main>`; la cabecera, el pie, el buscador, los fa
 - **Noticias**: cada 5 minutos en fin de semana de GP y cada 10 el resto, con botón «↻ Actualizar». En español se combinan Marca, Motorsport.com ES, Motorsport.com y BBC Sport; en inglés, Motorsport.com, Autosport, BBC Sport y RaceFans.
 - Solo se actualiza con la pestaña visible (al volver a ella se pone al día enseguida), respetando el límite de la API.
 
+## Redes sociales
+
+Las cuentas oficiales (Instagram, X, YouTube, TikTok, Facebook, Twitch y web) de los pilotos y equipos actuales están en `js/data/social.js`, tomadas de Wikidata el 20/11/2026 (solo cuentas vigentes). Aparecen en las fichas de piloto y equipo, en la parrilla actual y en las tarjetas de pilotos y equipos actuales. Para corregir o añadir una cuenta, edita ese archivo.
+
 ## Estructura
 
 ```

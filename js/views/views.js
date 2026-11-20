@@ -91,7 +91,7 @@ F1.views = (function () {
       title: name, small: d?.full && d.full !== name ? d.full : (titles.length ? t("{n}× campeón del mundo", { n: titles.length }) : t("Piloto de Fórmula 1")),
       num: api?.permanentNumber || d?.num || (titles.length ? titles.length : ""),
       meta: [`${flag(nat)} ${esc(F1.nat(nat)[1])}`, born ? `${t("Nacido el")} ${fmtDate(born, longDate)}${age ? ` (${t("{n} años", { n: age })})` : ""}` : "", d?.died ? `${t("Fallecido el")} ${fmtDate(d.died, longDate)}` : "", api?.permanentNumber ? `${t("Dorsal")} #${esc(api.permanentNumber)}` : ""],
-      actions: `${F1.ui.favBtn("driver", id, name, "inline")}<a class="btn btn-ghost btn-sm" href="${F1.page("comparador", { a: id })}">${t("Comparar con otro piloto")}</a>${api?.url ? `<a class="btn btn-ghost btn-sm ext" href="${esc(api.url)}" target="_blank" rel="noopener">Wikipedia</a>` : ""}`,
+      actions: `${F1.ui.favBtn("driver", id, name, "inline")}${F1.ui.social(id, { size: "lg" })}<a class="btn btn-ghost btn-sm" href="${F1.page("comparador", { a: id })}">${t("Comparar con otro piloto")}</a>${api?.url ? `<a class="btn btn-ghost btn-sm ext" href="${esc(api.url)}" target="_blank" rel="noopener">Wikipedia</a>` : ""}`,
     });
     setBg(bg, drv.img(id, api));
     // Retrato nítido sobre fondo desenfocado
@@ -162,6 +162,7 @@ F1.views = (function () {
     // Columna lateral
     side.innerHTML = `
       ${titles.length ? `<div class="side-card"><p class="tele-label gold">${t("Campeonatos del mundo")}</p><ul class="title-list" style="margin-top:8px">${titles.map((c) => `<li><b>${c.year}</b>${F1.ui.teamLogo(F1.team.get(c.team), 28, { year: c.year }) || ""}<span><a class="link" href="${href.team(c.team)}">${esc(F1.team.name(c.team))}</a><br/><span class="small muted">${c.carKey ? `<a href="${href.car(c.carKey)}">${esc(c.car)}</a>` : esc(c.car)}</span></span></li>`).join("")}</ul></div>` : ""}
+      ${F1.data.social[id] ? `<div class="side-card"><p class="tele-label">${t("Redes sociales oficiales")}</p><div style="margin-top:10px">${F1.ui.social(id, { labels: true })}</div><p class="note">${t("Cuentas verificadas en Wikidata")} · <a class="link" href="https://www.wikidata.org/wiki/${F1.data.social[id].wd}" target="_blank" rel="noopener">${F1.data.social[id].wd}</a></p></div>` : ""}
       <div class="side-card"><p class="tele-label">${t("Trayectoria · equipos")}</p><div class="teams-list" style="margin-top:8px">${loading()}</div></div>
       ${d ? `<div class="side-card"><p class="tele-label">${t("Época")}</p><p style="margin-top:6px" class="mono">${d.era[0]} – ${d.era[1] >= new Date().getFullYear() ? t("en activo") : d.era[1]}</p></div>` : ""}
       ${reg ? `<div class="side-card"><p class="tele-label">${t("Retrato")}</p><p class="small" style="margin-top:6px">${esc(reg.desc)}${reg.kind === "car" ? ` · <em>${t("No hay un retrato libre con el uniforme actual; se muestra al piloto con su monoplaza.")}</em>` : ""}</p><p class="note">${esc(reg.author)} · ${esc(reg.license)} · <a class="link" href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(reg.file.replace(/ /g, "_"))}" target="_blank" rel="noopener">Wikimedia Commons</a></p></div>` : ""}`;
@@ -177,7 +178,7 @@ F1.views = (function () {
     const { bg, body } = shell({
       title: tm.short, small: tm.name, tc: tm.color, logo: F1.ui.teamLogo(tm, 76),
       meta: [`${flag(tm.nat)} ${esc(F1.nat(tm.nat)[1])}`, `${t("Fundación")}: ${tm.founded}`, `${t("Debut en F1")}: ${tm.debut}`, esc(tm.base)],
-      actions: F1.ui.favBtn("team", tm.key, tm.name, "inline"),
+      actions: F1.ui.favBtn("team", tm.key, tm.name, "inline") + F1.ui.social(tm.key, { size: "lg" }),
     });
     const [pt, pq] = F1.team.photo(tm);
     setBg(bg, pt, pq);
@@ -234,6 +235,7 @@ F1.views = (function () {
         ${L ? `<p class="note">${t("Logotipo")}${L.season ? ` (${esc(L.season)})` : ""}: ${esc(L.license)} · <a class="link" href="${esc(L.page)}" target="_blank" rel="noopener">${esc(L.source)}</a></p>` : `<p class="note">${t("Sin logotipo disponible: se muestra un monograma con sus colores.")}</p>`}
         ${(F1.img.logos[tm.key] || []).length > 1 ? `<div class="logo-eras">${F1.img.logos[tm.key].map((x) => `<span title="${esc(x.season || "")}"><img src="${esc(x.src)}" alt="" loading="lazy"/><small>${esc(x.season || "")}</small></span>`).join("")}</div>` : ""}
       </div>
+      ${F1.data.social[tm.key] ? `<div class="side-card"><p class="tele-label">${t("Redes sociales oficiales")}</p><div style="margin-top:10px">${F1.ui.social(tm.key, { labels: true })}</div><p class="note">${t("Cuentas verificadas en Wikidata")} · <a class="link" href="https://www.wikidata.org/wiki/${F1.data.social[tm.key].wd}" target="_blank" rel="noopener">${F1.data.social[tm.key].wd}</a></p></div>` : ""}
       <div class="side-card"><p class="tele-label">${t("Evolución de la escudería")}</p><ul class="mini-timeline" style="margin-top:8px">${tm.timeline.map((x) => `<li><b>${x.y}</b><span>${esc(x.t)}</span></li>`).join("")}</ul></div>
       ${cy.length ? `<div class="side-card"><p class="tele-label gold">${t("Títulos de constructores")}</p><p class="mono" style="margin-top:8px">${cy.join(" · ")}</p></div>` : ""}`;
   }

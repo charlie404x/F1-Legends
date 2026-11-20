@@ -31,6 +31,7 @@ F1.sections.grid = (function () {
               <div class="team-head">${F1.ui.teamLogo(tm || { mono: T.c.name.slice(0, 2), color: "#888", key: cid, name: T.c.name }, 46)}<div><h3>${esc(T.c.name)}</h3><span class="tele-label">${flag(T.c.nationality)} ${car ? `${t("Monoplaza")} ${esc(car)}` : ""}</span></div></div>
               <div style="text-align:right"><span class="mono" style="font-size:1.4rem;font-weight:600">${esc(st?.points ?? "—")}</span><br/><span class="tele-label">P${esc(st?.position ?? "—")} · pts</span></div>
             </div>
+            <div class="gt-social">${F1.ui.social(tm?.key || cid, { size: "sm" })}</div>
             <div class="gt-car"></div>
             <div class="gt-drivers"></div>
             <a class="btn btn-ghost btn-sm" style="margin:12px 18px 16px 24px" href="${href.team(tm?.key || cid)}">${t("Ficha del equipo, resultados y estadísticas")} →</a>
@@ -41,7 +42,10 @@ F1.sections.grid = (function () {
           const s = pts[d.driverId];
           const de = F1.u.el(`<a class="gt-driver" href="${href.driver(d.driverId)}"><div><span class="gt-num">${esc(d.permanentNumber || "")}</span><br/><b>${esc(d.givenName)} ${esc(d.familyName)}</b><br/><span class="small muted">${flag(d.nationality)} ${s ? `P${esc(s.position)} · ${esc(s.points)} pts` : "—"}</span></div></a>`);
           de.prepend(drv.photo(d.driverId, d, { w: 330 }));
-          el.querySelector(".gt-drivers").appendChild(de);
+          const soc = F1.ui.social(d.driverId, { size: "sm" });
+          const box = F1.u.el(`<div class="gt-driver-wrap"></div>`); box.appendChild(de);
+          if (soc) box.insertAdjacentHTML("beforeend", soc);
+          el.querySelector(".gt-drivers").appendChild(box);
         });
         wrap.appendChild(el);
       });

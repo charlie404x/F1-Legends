@@ -18,7 +18,7 @@
     "services/api", "services/stats", "services/media", "services/video", "services/news",
     "data/nations", "data/drivers", "data/champions", "data/teams", "data/cars", "data/circuits",
     "data/plays", "data/rivalries", "data/history", "data/timeline", "data/gallery", "data/tech",
-    "data/rules", "data/glossary", "data/quiz", "data/images",
+    "data/rules", "data/glossary", "data/quiz", "data/images", "data/social",
     lang === "en" ? "i18n/en-data" : null,
     "components/ui", "components/lightbox", "components/track", "components/gallery",
     "sections/hero", "sections/live", "sections/history", "sections/champions", "sections/plays",
